@@ -8,11 +8,12 @@ buildscript {
 
     dependencies {
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5"
-        classpath 'org.openjfx:javafx-plugin:0.0.11'
     }
 }
 
-apply plugin: 'org.openjfx.javafxplugin'
+//-------------------------------------------------------------------------------------------------
+// BASIC CONFIGURATION.
+//-------------------------------------------------------------------------------------------------
 
 // print welcome message.
 apply from: rootProject.file("gradle/welcome.gradle")
@@ -46,18 +47,9 @@ task("initSourceDirs", group: "build setup").doLast {
 // provide java tasks.
 apply plugin: "java"
 
-repositories {
-    jcenter()
-}
-
-javafx {
-    modules = [ 'javafx.controls', 'javafx.graphics' ]
-    version = '12.0.1'
-}
-
 // java language level.
-sourceCompatibility = "9"
-targetCompatibility = "9"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 // configure publish tasks.
 apply from: rootProject.file("gradle/publish-bintray.gradle")
