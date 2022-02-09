@@ -225,25 +225,26 @@ public final class MonocleApplication extends Application {
         Screen screen = null;
         try {
             NativeScreen ns = platform.getScreen();
-            Constructor c = AccessController.doPrivileged(
-                    new PrivilegedAction<Constructor>() {
-                        @Override
-                        public Constructor run() {
-                            try {
-                                Constructor c = Screen.class.getDeclaredConstructor(
-                                        Long.TYPE,
-                                        Integer.TYPE,
-                                        Integer.TYPE, Integer.TYPE,
-                                        Integer.TYPE, Integer.TYPE,
-                                        Integer.TYPE, Integer.TYPE,
-                                        Integer.TYPE, Integer.TYPE,
-                                        Integer.TYPE, Integer.TYPE, Float.TYPE);
-                                c.setAccessible(true);
-                                return c;
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                return null;
-                            }
+            Constructor<Screen> c = AccessController.doPrivileged(
+                    (PrivilegedAction<Constructor<Screen>>) () -> {
+                        try {
+                            Constructor<Screen> c1 = Screen.class.getDeclaredConstructor(
+                                    Long.TYPE,
+                                    Integer.TYPE,
+                                    Integer.TYPE, Integer.TYPE,
+                                    Integer.TYPE, Integer.TYPE,
+                                    Integer.TYPE, Integer.TYPE,
+                                    Integer.TYPE, Integer.TYPE,
+                                    Integer.TYPE, Integer.TYPE,
+                                    Integer.TYPE, Integer.TYPE,
+                                    Integer.TYPE, Integer.TYPE,
+                                    Float.TYPE, Float.TYPE,
+                                    Float.TYPE, Float.TYPE);
+                            c1.setAccessible(true);
+                            return c1;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
                         }
                     });
             if (c != null) {
@@ -283,6 +284,7 @@ public final class MonocleApplication extends Application {
         return MonocleTimer.getMaxPeriod_impl();
     }
 
+    @Override
     public boolean hasWindowManager() {
         return false;
     }
