@@ -251,10 +251,16 @@ public final class MonocleApplication extends Application {
                 screen = (Screen) c.newInstance(
                         1l, // dummy native pointer;
                         ns.getDepth(),
-                        0, 0, ns.getWidth(), ns.getHeight(),
-                        0, 0, ns.getWidth(), ns.getHeight(),
+                        0, 0,
+                        ns.getWidth(), ns.getHeight(),
+                        0, 0,
+                        ns.getWidth(), ns.getHeight(),
+                        0, 0,
+                        ns.getWidth(), ns.getHeight(),
                         ns.getDPI(), ns.getDPI(),
-                        ns.getScale());
+                        ns.getScale(), ns.getScale(),
+                        ns.getScale(), ns.getScale()
+                );
                 // Move the cursor to the middle of the screen
                 MouseState mouseState = new MouseState();
                 mouseState.setX(ns.getWidth() / 2);
